@@ -1,0 +1,52 @@
+#domain-history-wrapper {
+    flex-direction: column;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    background: #001018;
+    width: 100%;
+}
+
+#close-history-details {
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.history-information-title {
+    text-align: center;
+    padding-top: 84px;
+    font-size: 18px;
+    margin-bottom: 24px;
+}
+
+#history-full-content table {
+    width: 86%;
+    color: #d1d1c5;
+    margin: auto;
+}
+
+#history-full-content tr {
+    border-bottom: solid 1px #353535;
+}
+
+#history-full-content td {
+    padding: 10px 6px;
+    overflow-wrap: anywhere;
+}
+
+.hr-date {
+    width: 70px;
+}
+
+.hr-delete svg {
+    fill: #f44336;
+    cursor: pointer;
+}
+
+.view-full-analysis {
+    cursor: pointer;
+}

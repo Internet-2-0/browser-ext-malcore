@@ -1,0 +1,47 @@
+.panel {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.panel-header {
+    padding: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel-header label {
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.panel-header svg {
+    cursor: pointer;
+    margin-left: 4px;
+}
+
+.panel-title {
+    margin: 0;
+}
+
+.panel-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.panel-content-show {
+    max-height: 2000000px;
+}
+
+
+.dropdown-icon {
+    transition: transform 0.4s ease;
+}
+
+.panel-content-show .dropdown-icon {
+    transform: rotateX(180deg);
+}

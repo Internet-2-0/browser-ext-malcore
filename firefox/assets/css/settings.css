@@ -1,0 +1,162 @@
+.dropdown {
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.dropdown-header {
+    width: 100%;
+    height: 52px;
+    background: #000c12;
+}
+
+#popoverContent {
+    display: none;
+    position: absolute;
+    background-color: transparent;
+    border: solid 1px #ccc;
+    padding: 14px 20px;
+    top: 42px;
+    right: 0;
+    width: 200px;
+    flex-direction: column;
+    left: unset;
+    background: #000c12;
+    border: none;
+    width: 140px;
+    min-width: 140px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+#popoverTrigger {
+    position: fixed;
+    right: 14px;
+    top: 14px;
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px #072f43;
+    background: #001018;
+    border-radius: 4px;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dropdown-item label {
+    margin: 0;
+    margin-left: 8px;
+    color: white;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.dropdown-item .glyphicon {
+    color: whitesmoke;
+    width: 17px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+}
+
+#btnLogout, #btnHistory {
+    margin-top: 16px;
+}
+
+#settings-wrapper {
+    background: #000c12;
+    width: 100%;
+    height: calc(100vh - 52px);
+    flex-direction: column;
+    z-index: 9;
+    position: relative;
+    position: absolute;
+    top: 50px;
+}
+
+.settings-title {
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+.settings-title label {
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+    padding-top: 14px;
+}
+
+#btnCloseSettings {
+    position: absolute;
+    right: 18px;
+    top: 21px;
+    cursor: pointer;
+}
+
+
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 22px;
+}
+
+.toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #1c1c1c;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #007bff;
+}
+
+input:checked+.slider:before {
+    transform: translateX(18px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.settings-options .row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 50px 0px 0 0;
+}
+
+.settings-options label {
+    color: white;
+    font-weight: 500;
+}
