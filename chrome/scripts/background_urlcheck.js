@@ -33,7 +33,8 @@ async function handleDomainAnalysis() {
         body: JSON.stringify({ 
           domain: scanUrl,
           source: "chrome_extension",
-          mode: "background" 
+          mode: "background",
+          version: browserVersion 
         }),
       });
 
@@ -54,6 +55,7 @@ async function handleDomainAnalysis() {
   } catch (error) {
     hideSpinner();
     domainError.style.display = "block";
+    console.log(error)
   }
 }
 

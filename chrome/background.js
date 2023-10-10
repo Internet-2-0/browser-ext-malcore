@@ -1,8 +1,11 @@
 const APIURL = "https://api.malcore.io";
 // const APIURL = "https://malcoreapi.internet20test.xyz";
+// const APIURL = "http://localhost:3000";
+
 var currentUrl = null;
 var currentTabId = null;
 var windowId = null;
+var browserVersion = null;
 
 /**
  * @description check the url when chrome tab is activated.
@@ -12,7 +15,7 @@ chrome.tabs.onActivated.addListener(async function (activeInfo) {
   try {
     const runningMode = await getRunningModeFromLocalStorage();
     const enableStatus = await getEnableStatusFromLocalStorage();
-    console.log('enableStatus######################', runningMode, enableStatus)
+    browserVersion = /Chrome\/([0-9.]+)/.exec(navigator.userAgent)[1];
 
     if (enableStatus && runningMode === "background") {
       chrome.tabs.get(activeInfo.tabId, async function (tab) {
@@ -24,11 +27,15 @@ chrome.tabs.onActivated.addListener(async function (activeInfo) {
             blockContent(currentTabId, false);
             checkUrl(currentUrl, currentTabId);
           }
-        } catch (error) {}
+        } catch (error) {
+          console.log(error)
+        }
       });
     }
     return;
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 });
 
 function setBlockContent() {
@@ -198,7 +205,8 @@ async function checkUrl(url, tabId) {
       body: JSON.stringify({ 
         url: url,
         source: "chrome_extension",
-        mode: "background"
+        mode: "background",
+        version: browserVersion 
       }),
     });
     const responseData = await response.json();

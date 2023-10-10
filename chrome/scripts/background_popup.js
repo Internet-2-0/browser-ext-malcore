@@ -2,12 +2,15 @@
 
 const APIURL = "https://api.malcore.io";
 // const APIURL = "https://malcoreapi.internet20test.xyz";
+// const APIURL = "http://localhost:3000";
+
 var apiKey = null;
 var scanUrl = null;
 var runningMode = "realtime";
 var isSafe = false;
 var isEnabled = true;
 var urlChecked = false;
+var browserVersion = null;
 
 window.addEventListener("DOMContentLoaded", function () {
   apiKey = localStorage.getItem("apiKey");
@@ -18,6 +21,7 @@ window.addEventListener("DOMContentLoaded", function () {
   if(localStorage.getItem("enableStatus") !== null) {
     isEnabled = localStorage.getItem("enableStatus") === "true" ? true : false;
   }
+  browserVersion = /Chrome\/([0-9.]+)/.exec(navigator.userAgent)[1];
 
   if (apiKey) {
     requestUrlCheck();
@@ -42,7 +46,12 @@ async function requestUrlCheck() {
           apiKey: apiKey,
           source: "api-uploaded",
         },
-        body: JSON.stringify({ url: scanUrl }),
+        body: JSON.stringify({ 
+          url: scanUrl,
+          // source: "chrome_extension",
+          // mode: "realtime",
+          // version: browserVersion  
+        }),
       });
 
       const responseData = await response.json();

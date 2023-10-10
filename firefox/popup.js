@@ -2,12 +2,15 @@
 
 const APIURL = "https://api.malcore.io";
 // const APIURL = "https://malcoreapi.internet20test.xyz";
+// const APIURL = "http://localhost:3000";
+
 var apiKey = null;
 var scanUrl = null;
 var runningMode = "realtime";
 var isSafe = false;
 var isEnabled = true;
 var urlChecked = false;
+var browserVersion = null;
 
 /**
  * @description get the api key and running mode at the initial loading
@@ -17,12 +20,17 @@ window.addEventListener("DOMContentLoaded", function () {
   runningMode = localStorage.getItem("runningMode") || "realtime";
   if (localStorage.getItem("enableStatus") !== null) {
     isEnabled = localStorage.getItem("enableStatus") === "true" ? true : false;
+  } else {
+    window.localStorage.setItem("enableStatus", true);
+    chrome.storage.local.set({ enableStatus: true });
   }
 
   // update the settings option
   if (runningMode === "background") {
     backgroundButton.click();
   }
+
+  browser.runtime.getBrowserInfo().then((data) => (browserVersion = data.version));
 
   if (!isEnabled) {
     document.getElementById("enableButton").click();
@@ -54,11 +62,12 @@ async function requestUrlCheck() {
           apiKey: apiKey,
           source: "api-uploaded",
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           url: scanUrl,
           source: "firefox_extension",
-          mode: "realtime"
-         }),
+          mode: "realtime",
+          version: browserVersion,
+        }),
       });
 
       const responseData = await response.json();
@@ -229,13 +238,12 @@ function showReportContainer(threat_level, tabId) {
   }
   // tempcode
   // blockContent(tabId);
-
 }
 
 // disable default submit
 document.getElementById("loginForm").addEventListener("submit", function (e) {
   e.preventDefault();
-}); 
+});
 
 function setBlockContent() {
   document.documentElement.innerHTML = ` 
@@ -309,7 +317,7 @@ function setBlockContent() {
 function blockContent(tabId) {
   chrome.scripting.executeScript({
     target: { tabId: tabId, allFrames: true },
-    func: setBlockContent
+    func: setBlockContent,
   });
 }
 
@@ -371,7 +379,7 @@ function continuePage() {
 }
 
 function gobackPage() {
-  browser.tabs.goBack(); 
+  browser.tabs.goBack();
   window.close();
 }
 

@@ -33,7 +33,8 @@ async function handleDomainAnalysis() {
         body: JSON.stringify({ 
           domain: scanUrl, 
           source: "firefox_extension",
-          mode: "realtime"
+          mode: "realtime",
+          version: browserVersion,
         }),
       });
 

@@ -2,16 +2,21 @@
 
 const APIURL = "https://api.malcore.io";
 // const APIURL = "https://malcoreapi.internet20test.xyz";
+// const APIURL = "http://localhost:3000";
+
 var apiKey = null;
 var scanUrl = null;
 var runningMode = "realtime";
 var isSafe = false;
 var isEnabled = true;
 var urlChecked = false;
+var browserVersion = null;
 
 window.addEventListener("DOMContentLoaded", function () {
   apiKey = localStorage.getItem("apiKey");
   runningMode = localStorage.getItem("runningMode") || "realtime";
+  browser.runtime.getBrowserInfo().then((data) => (browserVersion = data.version));
+
   if (runningMode === "background") {
     backgroundButton.click();
   }
@@ -46,7 +51,8 @@ async function requestUrlCheck() {
         body: JSON.stringify({ 
           url: scanUrl, 
           // source: "firefox_extension",
-          // mode: "background" 
+          // mode: "background",
+          // version: browserVersion,
         }),
       });
 

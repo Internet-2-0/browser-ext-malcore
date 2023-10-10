@@ -90,7 +90,6 @@ backgroundButton.addEventListener("change", function () {
 enableButton.addEventListener("change", function () {
   enableButton.classList.toggle("checked"); 
 
-  console.log('enableButton.checked==>', enableButton.checked)
   isEnabled = enableButton.checked;
 
   window.localStorage.setItem("enableStatus", enableButton.checked);

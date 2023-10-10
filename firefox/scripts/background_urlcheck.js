@@ -30,10 +30,11 @@ async function handleDomainAnalysis() {
           apiKey: apiKey,
           source: "api-uploaded",
         },
-        body: JSON.stringify({ 
-          domain: scanUrl, 
+        body: JSON.stringify({
+          domain: scanUrl,
           source: "firefox_extension",
-          mode: "background"
+          mode: "background",
+          version: browserVersion,
         }),
       });
 

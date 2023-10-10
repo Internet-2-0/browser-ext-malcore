@@ -33,7 +33,8 @@ async function handleDomainAnalysis() {
         body: JSON.stringify({ 
           domain: scanUrl, 
           source: "chrome_extension",
-          mode: "realtime" 
+          mode: "realtime",
+          version: browserVersion 
         }),
       });
 

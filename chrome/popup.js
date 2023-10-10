@@ -2,12 +2,15 @@
 
 const APIURL = "https://api.malcore.io";
 // const APIURL = "https://malcoreapi.internet20test.xyz";
+// const APIURL = "http://localhost:3000";
+
 var apiKey = null;
 var scanUrl = null;
 var runningMode = "realtime";
 var isSafe = false;
 var isEnabled = true;
 var urlChecked = false;
+var browserVersion = null;
 
 /**
  * @description get the api key and running mode at the initial loading
@@ -17,12 +20,17 @@ window.addEventListener("DOMContentLoaded", function () {
   runningMode = localStorage.getItem("runningMode") || "realtime";
   if (localStorage.getItem("enableStatus") !== null) {
     isEnabled = localStorage.getItem("enableStatus") === "true" ? true : false;
+  } else {
+    window.localStorage.setItem("enableStatus", true);
+    chrome.storage.local.set({ enableStatus: true });
   }
 
   // update the settings option
   if (runningMode === "background") {
     backgroundButton.click();
   }
+
+  browserVersion = /Chrome\/([0-9.]+)/.exec(navigator.userAgent)[1];
 
   if (!isEnabled) {
     document.getElementById("enableButton").click();
@@ -57,7 +65,8 @@ async function requestUrlCheck() {
         body: JSON.stringify({ 
           url: scanUrl,
           source: "chrome_extension",
-          mode: "realtime" 
+          mode: "realtime",
+          version: browserVersion 
         }),
       });
 
